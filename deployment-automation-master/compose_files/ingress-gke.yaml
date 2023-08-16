@@ -1,0 +1,30 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: common-ingress
+  annotations:
+    # use the shared ingress-nginx
+    kubernetes.io/ingress.class: "gce"
+    nginx.ingress.kubernetes.io/proxy-body-size: 16m
+spec:
+  rules:
+    #
+    # Your ingress rules here
+    #
+    - host: localhost
+      http:
+        paths:
+          - path: /api
+            backend:
+              service:
+                name: bda-backend-svc
+                port:
+                  number: 5000
+            pathType: Prefix
+          - path: /
+            backend:
+              service:
+                name: bda-frontend-svc
+                port:
+                  number: 3000
+            pathType: Prefix

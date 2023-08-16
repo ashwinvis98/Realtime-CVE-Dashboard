@@ -1,0 +1,25 @@
+apiVersion: apps/v1 #  for k8s versions before 1.9.0 use apps/v1beta2  and before 1.8.0 use extensions/v1beta1
+kind: Deployment
+metadata:
+  name: bda-frontend
+spec:
+  selector:
+    matchLabels:
+      app: bda-frontend
+  replicas: 1
+  revisionHistoryLimit: 1
+  template:
+    metadata:
+      labels:
+        app: bda-frontend
+    spec:
+      containers:
+      - name: bda-frontend
+        image: siddharths2710/bda_frontend:latest
+        resources:
+          limits:
+            memory: "900Mi"
+            cpu: "300m"
+        imagePullPolicy: Always
+        ports:
+          - containerPort: 3000

@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: bda-frontend-svc
+spec:
+  selector:
+    app: bda-frontend
+  ports:
+  - name: bda-frontend
+    port: 3000
+    targetPort: 3000
+
